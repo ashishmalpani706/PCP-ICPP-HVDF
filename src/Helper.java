@@ -11,12 +11,7 @@ public class Helper {
             n = Integer.parseInt(bufferedReader.readLine());
             for(int i=0;i<n;i++){
                 token = bufferedReader.readLine().split(" ");
-                if(token.length == 4){
-                    taskSet.add(new Task(ipi(token[0]),ipi(token[1]),ipi(token[2]),ipi(token[3])));
-                }
-                else{
-                    taskSet.add(new Task(ipi(token[0]),ipi(token[1]),ipi(token[2]),ipi(token[3]),ipi(token[4])));
-                }
+                taskSet.add(new Task(ipi(token[0]),ipi(token[1]),ipi(token[2]),ipi(token[3])));
             }
             config.simulationTime = ipi(bufferedReader.readLine().split(" ")[1]);
             bufferedReader.close();
@@ -30,19 +25,27 @@ public class Helper {
         return taskSet;
     }
 
-    public ArrayList<Resource> readResourcesFromFile(String fileName){
+    public ArrayList<Resource> readResourcesFromFile(String fileName, ArrayList<Task> taskSet){
         int n;
+        int numberOfTasksPerResource;
         String[] token;
         ArrayList<Resource> resourceSet = new ArrayList<Resource>();
         try{
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             bufferedReader.readLine();
-            n = Integer.parseInt(bufferedReader.readLine());
+            n = ipi(bufferedReader.readLine());
             for(int i=0;i<n;i++){
                 token = bufferedReader.readLine().split(" ");
+                resourceSet.add(new Resource(ipi(token[0])));
+                numberOfTasksPerResource = ipi(token[1]);
 
+                for(int j=0;j<numberOfTasksPerResource;j++){
+                    Task t = getTask(taskSet,ipi(token[j+2]));
+                    t.setResource(ipi(token[0]));
+                }
             }
+            bufferedReader.close();
         }
         catch(FileNotFoundException fnfe){
             System.err.println("FileNotFoundException : "+fnfe.getMessage());
@@ -85,6 +88,11 @@ public class Helper {
                 return t1.getTimePeriod() - (t2.getTimePeriod());
             }
         });
+
+        int i = 1;
+        for(Task t:taskSet){
+            t.setPriority(i++);
+        }
     }
 
     public void printInfo(int time, int label){
@@ -147,5 +155,26 @@ public class Helper {
             }
         }
         return null;
+    }
+
+    public Resource getResource(ArrayList<Resource> resourceSet, int id){
+        for(Resource r: resourceSet){
+            if(r.getID() == id){
+                return r;
+            }
+        }
+        return null;
+    }
+
+    public void calculatePriorityCeiling(ArrayList<Task> taskSet, ArrayList<Resource> resourceSet){
+        //get task by id and then min of that
+        for(Resource r:resourceSet){
+            for(Task t:taskSet){
+                if(t.getResource()==r.getID()){
+                    r.setPriorityCeiling(t.getPriority());
+                    break;
+                }
+            }
+        }
     }
 }

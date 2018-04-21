@@ -6,7 +6,7 @@ public class Run {
         String fileName = "input.txt";
 
         //Provide the path of the resource file. If the file is not in the main directory then specify absolute path
-        String resourceFileName = "input2.tst";
+        String resourceFileName = "input2.txt";
 
         //Specify the scheduler. Choose between PCP, ICPP and HVDF
         String selectedScheduler = "PCP";
@@ -18,10 +18,17 @@ public class Run {
         Helper help = new Helper();
         Scheduler sch = new Scheduler();
 
-        ArrayList<Task> taskSet = help.readFromFile(fileName); //Obtain the tasks from the file to make a set of tasks
+        //Obtain the tasks from the file to make a set of tasks
+        ArrayList<Task> taskSet = help.readFromFile("..\\"+fileName);
         help.printTaskSet(taskSet);
 
-        ArrayList<Resource> resourceSet = help.readResourcesFromFile(fileName); //Obtain the tasks from the file to make a set of tasks
+        System.out.println("\nAfter Sorting - Based on RM:");
+        help.sortByTimePeriod(taskSet);
+        help.printTaskSet(taskSet);
+
+        //Obtain the tasks from the file to make a set of tasks
+        ArrayList<Resource> resourceSet = help.readResourcesFromFile("..\\"+resourceFileName, taskSet);
+        help.calculatePriorityCeiling(taskSet, resourceSet);
         help.printResourceSet(resourceSet);
 
         System.out.println("\nRunning "+selectedScheduler+" Scheduling on the input data");

@@ -3,7 +3,12 @@ public class Resource {
     private int priorityCeiling;
     private boolean isLocked;
 
-    public int getId(){
+    public Resource(int idValue){
+        id = idValue;
+        isLocked = false;
+    }
+
+    public int getID(){
         return id;
     }
 
@@ -15,10 +20,6 @@ public class Resource {
         return isLocked;
     }
 
-    public void setId(int idValue){
-        id = idValue;
-    }
-
     public void setPriorityCeiling(int priorityCeilingValue){
         priorityCeiling = priorityCeilingValue;
     }
@@ -28,6 +29,6 @@ public class Resource {
     }
 
     public void printResource(){
-        System.out.println("ID: "+id+" Priority Ceiling: "+priorityCeiling);
+        System.out.println("ResourceID: "+id+" Priority Ceiling: "+priorityCeiling);
     }
 }

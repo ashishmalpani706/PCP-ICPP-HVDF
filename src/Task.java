@@ -10,6 +10,7 @@ public class Task {
     private int numberOfTimesPreempted;
     private int numberOfDeadlinesMissed;
     private boolean flag;
+    private boolean criticalSection;
     public String[] graph;
 
     public Task(int label, int et, int period, int dl){
@@ -23,26 +24,13 @@ public class Task {
         numberOfDeadlinesMissed = 0;
         numberOfTimesPreempted  = 0;
         resource = -1;
-        priority = Integer.MAX_VALUE;
-    }
-
-    public Task(int label, int et, int period, int dl, int defer){
-        id            = label;
-        executionTime = et;
-        timePeriod    = period;
-        timePeriod2   = period;
-        deadline      = dl;
-        executed      = 0;
-        flag          = true;
-        numberOfDeadlinesMissed = 0;
-        numberOfTimesPreempted  = 0;
-        resource = -1;
-        priority = Integer.MAX_VALUE;
+        priority = 0;
+        criticalSection = false;
     }
 
     public void printTask(){
         System.out.println("ID: "+id+" Execution Time: "+executionTime+" Time Period: "
-                +timePeriod+" Deadline: "+deadline);
+                +timePeriod+" Deadline: "+deadline+" Priority: "+priority);
     }
 
     public int getID(){
@@ -89,6 +77,10 @@ public class Task {
         return flag;
     }
 
+    public boolean getCriticalSection(){
+        return criticalSection;
+    }
+
     public void setExecutedTime(int num){
         executed = num;
     }
@@ -103,6 +95,10 @@ public class Task {
 
     public void setFlag(boolean flagValue){
         flag = flagValue;
+    }
+
+    public void setCriticalSection(boolean isInCriticalSection){
+        criticalSection = isInCriticalSection;
     }
 
     public void incrementNumberOfDeadlinesMissed(){
