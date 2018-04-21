@@ -33,7 +33,7 @@ public class Scheduler {
                 this.updateTaskSet(taskSet,time);
                 continue;
             }
-            h.printInfo(time,currentTask.getID());
+            h.printInfo(taskSet,time,currentTask.getID());
             this.updateCurrentTask(currentTask,time,h);
             this.checkForDeadlines(taskSet, resourceSet, time,h, tasksWithResources);
             this.updateTaskSet(taskSet,time);
@@ -48,6 +48,7 @@ public class Scheduler {
                 currentTask.setCriticalSection(false);
                 h.getResource(resourceSet, currentTask.getResource()).setIsLocked(false);
                 tasksWithResources.pop();
+                System.out.println("Resource R"+currentTask.getResource()+" released by Task T"+currentTask.getID());
 
                 if(tasksWithResources.empty()){
                     config.cs_star = Integer.MAX_VALUE;
@@ -73,6 +74,7 @@ public class Scheduler {
                     if(t.getPriority()<config.cs_star && !h.getResource(resourceSet, t.getResource()).getIsLocked()){
                         h.getResource(resourceSet, t.getResource()).setIsLocked(true);
                         tasksWithResources.push(t);
+                        System.out.println("Resource R"+t.getResource()+" acquired by Task T"+t.getID());
                         config.cs_star = h.getResource(resourceSet, t.getResource()).getPriorityCeiling();
                         return t;
                     }
@@ -114,6 +116,7 @@ public class Scheduler {
                 if(!tasksWithResources.empty() && t.equals(tasksWithResources.peek())){
                     h.getResource(resourceSet, t.getResource()).setIsLocked(false);
                     tasksWithResources.pop();
+                    System.out.println("Resource R"+t.getResource()+" released by Task T"+t.getID());
                     if(tasksWithResources.empty()){
                         config.cs_star = Integer.MAX_VALUE;
                     }

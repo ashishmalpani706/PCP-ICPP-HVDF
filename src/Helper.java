@@ -95,8 +95,14 @@ public class Helper {
         }
     }
 
-    public void printInfo(int time, int label){
-        System.out.println("Time = "+time+" - ID = T"+label);
+    public void printInfo(ArrayList<Task> taskSet, int time, int label){
+        Task t = getTask(taskSet, label);
+        if(!t.getCriticalSection()){
+            System.out.println("Time = "+time+" - ID = T"+label);
+        }
+        else{
+            System.out.println("Time = "+time+" - ID = T"+label+" - Resource ID = R"+t.getResource());
+        }
     }
 
     public void printInfo(int time){
