@@ -96,8 +96,6 @@ public class Scheduler {
                     prevTask.incrementNumberOfTimesPreempted();
                 }
 
-                if(temp.getID()==4) System.out.println("CRITICAL "+config.cs_star);
-
                 return temp;
             }
         }
