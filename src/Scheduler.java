@@ -3,7 +3,7 @@ public class Scheduler {
     public void sched(ArrayList<Task> taskSet, ArrayList<Resource> resourceSet, int simulationTime, String scheduler){
         int time = 0;
         Helper h = new Helper();
-        h.initGraph(simulationTime,taskSet);
+
         Task currentTask = new Task(0,0,0,0);
         Stack<Task> tasksWithResources = new Stack<Task>();
         System.out.println("\nAfter sorting, we have the following tasks with descending priorities");
@@ -18,7 +18,20 @@ public class Scheduler {
 
         h.printTaskSet(taskSet);
 
+        //If there are any non-multiples of 4 in the task set, then:
+        if(config.containsNonMultipleOfFour){
+            config.simulationTime*=4;
+            simulationTime = config.simulationTime;
+            for(Task t:taskSet){
+                t.setDeadline(4*t.getDeadline());
+                t.setTimePeriod(4*t.getTimePeriod());
+                t.setTimePeriod2(4*t.getTimePeriod2());
+                t.setExecutionTime(4*t.getExecutionTime());
+            }
+        }
+
         System.out.println();
+        h.initGraph(simulationTime,taskSet);
 
         while(time<simulationTime){
             time++;
@@ -41,11 +54,24 @@ public class Scheduler {
             // if executed time of the current task == 1/4th of eT then critical section = true
             if(currentTask.getResource()>-1 && currentTask.getExecutedTime()==(currentTask.getExecutionTime()/4)){
                 currentTask.setCriticalSection(true);
+
+                if(!currentTask.getInheritanceFlag()){
+                    if(!tasksWithResources.isEmpty() && !currentTask.equals(tasksWithResources.peek()) &&
+                            currentTask.getPriority()>=config.cs_star){
+                        System.out.println("Task T"+tasksWithResources.peek().getID()+" has inherited the " +
+                                "priority of Task T"+h.getTaskFromPriority(taskSet,config.cs_star).getID()+" which is "
+                                +config.cs_star);
+                        currentTask.setInheritanceFlag(true);
+                    }
+
+                }
+
             }
             // if executed time of the current task == 3/4th of eT then critical section = false
             if(currentTask.getCriticalSection() && currentTask.getExecutedTime()==(3*currentTask.getExecutionTime()/4)){
                 currentTask.setCriticalSection(false);
                 h.getResource(resourceSet, currentTask.getResource()).setIsLocked(false);
+                tasksWithResources.peek().setInheritanceFlag(false);
                 tasksWithResources.pop();
                 System.out.println("Resource R"+currentTask.getResource()+" released by Task T"+currentTask.getID());
 
@@ -140,6 +166,7 @@ public class Scheduler {
                 t.setCriticalSection(false);
                 if(!tasksWithResources.empty() && t.equals(tasksWithResources.peek())){
                     h.getResource(resourceSet, t.getResource()).setIsLocked(false);
+                    tasksWithResources.peek().setInheritanceFlag(false);
                     tasksWithResources.pop();
                     System.out.println("Resource R"+t.getResource()+" released by Task T"+t.getID());
                     if(tasksWithResources.empty()){

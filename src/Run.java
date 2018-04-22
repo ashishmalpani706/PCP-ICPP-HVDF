@@ -61,6 +61,12 @@ public class Run {
     }
 
     public static void printLegend(){
-        System.out.println("\nTask = "+config.displayChar+" -AND- Resource = "+config.displayResourceChar+"\n");
+        System.out.println("\nTask = "+config.displayChar+" -AND- Resource = "+config.displayResourceChar);
+        if(config.containsNonMultipleOfFour){
+            System.out.println("Each unit time = 0.25\n");
+        }
+        else{
+            System.out.println("Each unit time = 1\n");
+        }
     }
 }

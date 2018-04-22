@@ -1,6 +1,5 @@
 public class Task {
     private int id;
-    private double density;
     private int deadline;
     private int executed;
     private int resource;
@@ -10,8 +9,10 @@ public class Task {
     private int executionTime;
     private int numberOfTimesPreempted;
     private int numberOfDeadlinesMissed;
+    private double density;
     private boolean flag;
     private boolean criticalSection;
+    private boolean inheritanceFlag;
     public String[] graph;
 
     public Task(int label, int et, int period, int dl){
@@ -27,6 +28,7 @@ public class Task {
         resource = -1;
         priority = 0;
         criticalSection = false;
+        inheritanceFlag = false;
         density = 0.0;
     }
 
@@ -43,6 +45,7 @@ public class Task {
         resource = -1;
         priority = 0;
         criticalSection = false;
+        inheritanceFlag = false;
         density = valueFromFile;
     }
 
@@ -109,6 +112,10 @@ public class Task {
         return criticalSection;
     }
 
+    public boolean getInheritanceFlag(){
+        return inheritanceFlag;
+    }
+
     public void setExecutedTime(int num){
         executed = num;
     }
@@ -121,12 +128,32 @@ public class Task {
         resource = resourceValue;
     }
 
+    public void setDeadline(int newDeadline){
+        deadline = newDeadline;
+    }
+
+    public void setTimePeriod(int newTimePeriod){
+        timePeriod = newTimePeriod;
+    }
+
+    public void setTimePeriod2(int newTimePeriod2){
+        timePeriod2 = newTimePeriod2;
+    }
+
+    public void setExecutionTime(int newExecutionTime){
+        executionTime = newExecutionTime;
+    }
+
     public void setFlag(boolean flagValue){
         flag = flagValue;
     }
 
     public void setCriticalSection(boolean isInCriticalSection){
         criticalSection = isInCriticalSection;
+    }
+
+    public void setInheritanceFlag(boolean newInheritanceFlag){
+        inheritanceFlag = newInheritanceFlag;
     }
 
     public void incrementNumberOfDeadlinesMissed(){
