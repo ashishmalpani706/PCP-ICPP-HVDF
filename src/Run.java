@@ -13,7 +13,8 @@ public class Run {
         //String selectedScheduler = "ICPP";
         //String selectedScheduler = "HVDF";
 
-        //outputToAFile(); //UNCOMMENT THE LINE TO SAVE THE OUTPUT TO A FILE "output.txt" and not output to the console
+        //outputToAFile(); //UNCOMMENT THE LINE TO SAVE THE OUTPUT TO A FILE "output.txt" in root directory and
+        // not output to the console
 
         Helper help = new Helper();
         Scheduler sch = new Scheduler();
@@ -37,7 +38,7 @@ public class Run {
 
     public static void outputToAFile(){
         try{
-            PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+            PrintStream out = new PrintStream(new FileOutputStream("..\\output.txt"));
             System.setOut(out);
         }
         catch(FileNotFoundException fnfe){

@@ -66,8 +66,11 @@ public class Scheduler {
 
     public Task pickTask(ArrayList<Task> taskSet, ArrayList<Resource> resourceSet, Task prevTask, int time, Helper h,
                          Stack<Task> tasksWithResources, String scheduler){
+        Task temp = new Task(0,0,0,0);
         for(Task t:taskSet){
             if(t.getFlag()){
+
+                temp = t;
 
                 //CHECK IF IT IS IN CS
                 if(t.getCriticalSection()){
@@ -78,22 +81,22 @@ public class Scheduler {
                         config.cs_star = h.getResource(resourceSet, t.getResource()).getPriorityCeiling();
                     }
                     else{
-                        return tasksWithResources.peek();
+                        temp =  tasksWithResources.peek();
                     }
                 }
 
                 if(scheduler.equals("ICPP")) {
                     if (!t.getCriticalSection() && t.getPriority() >= config.cs_star) {
-                        return tasksWithResources.peek();
+                        temp = tasksWithResources.peek();
                     }
                 }
 
-                if(prevTask!=null && prevTask.getFlag() && prevTask.getID()!=0 && prevTask != t &&
+                if(prevTask!=null && prevTask.getFlag() && prevTask.getID()!=0 && prevTask != temp &&
                         prevTask.getTimePeriod() != (prevTask.getTimePeriod2()+time - 1)){
-                    h.taskPreempted(time,prevTask.getID(),t.getID());
+                    h.taskPreempted(time,prevTask.getID(),temp.getID());
                     prevTask.incrementNumberOfTimesPreempted();
                 }
-                return t;
+                return temp;
             }
         }
         return null;

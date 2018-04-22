@@ -5,4 +5,6 @@ public class config {
     public static int totalDeadlinesMissed = 0;
     public static int totalTasksPreempted  = 0;
     public static String displayChar = "|";
+    public static String displayResourceChar = "\\";
+
 }
