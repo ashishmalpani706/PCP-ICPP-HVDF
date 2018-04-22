@@ -1,5 +1,6 @@
 public class Task {
     private int id;
+    private int value;
     private int deadline;
     private int executed;
     private int resource;
@@ -26,6 +27,23 @@ public class Task {
         resource = -1;
         priority = 0;
         criticalSection = false;
+        value = 0;
+    }
+
+    public Task(int label, int et, int period, int dl, int valueFromFile){
+        id            = label;
+        executionTime = et;
+        timePeriod    = period;
+        timePeriod2   = period;
+        deadline      = dl;
+        executed      = 0;
+        flag          = true;
+        numberOfDeadlinesMissed = 0;
+        numberOfTimesPreempted  = 0;
+        resource = -1;
+        priority = 0;
+        criticalSection = false;
+        value = valueFromFile;
     }
 
     public void printTask(){

@@ -20,7 +20,7 @@ public class Run {
         Scheduler sch = new Scheduler();
 
         //Obtain the tasks from the file to make a set of tasks
-        ArrayList<Task> taskSet = help.readFromFile("..\\"+fileName);
+        ArrayList<Task> taskSet = help.readFromFile("..\\"+fileName, selectedScheduler);
         help.printTaskSet(taskSet);
 
         System.out.println("\nAfter Sorting - Based on RM:");
@@ -34,6 +34,8 @@ public class Run {
 
         System.out.println("\nRunning "+selectedScheduler+" Scheduling on the input data");
         sch.sched(taskSet,resourceSet,config.simulationTime,selectedScheduler);
+
+        printLegend();
     }
 
     public static void outputToAFile(){
@@ -44,5 +46,9 @@ public class Run {
         catch(FileNotFoundException fnfe){
             System.err.println("FileNotFoundException : "+fnfe.getMessage());
         }
+    }
+
+    public static void printLegend(){
+        System.out.println("\nTask = "+config.displayChar+" -AND- Resource = "+config.displayResourceChar+"\n");
     }
 }

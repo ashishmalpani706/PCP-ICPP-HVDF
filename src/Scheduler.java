@@ -96,6 +96,9 @@ public class Scheduler {
                     h.taskPreempted(time,prevTask.getID(),temp.getID());
                     prevTask.incrementNumberOfTimesPreempted();
                 }
+
+                if(temp.getID()==4) System.out.println("CRITICAL "+config.cs_star);
+
                 return temp;
             }
         }
@@ -105,7 +108,12 @@ public class Scheduler {
     public void updateCurrentTask(Task t, int time, Helper h){
         t.setExecutedTime(t.getExecutedTime()+config.increaseTime);
         //GRAPH
-        t.graph[time-1] = config.displayChar;
+        if(!t.getCriticalSection()){
+            t.graph[time-1] = config.displayChar;
+        }
+        else{
+            t.graph[time-1] = config.displayResourceChar;
+        }
         if(t.getExecutedTime() == t.getExecutionTime()){
             t.setExecutedTime(0);
             t.setFlag(false);

@@ -6,5 +6,5 @@ public class config {
     public static int totalTasksPreempted  = 0;
     public static String displayChar = "|";
     public static String displayResourceChar = "\\";
-
+    public static boolean containsNonMultipleOfFour = false;
 }

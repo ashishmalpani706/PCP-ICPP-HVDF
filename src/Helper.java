@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 public class Helper {
-    public ArrayList<Task> readFromFile(String fileName){
+    public ArrayList<Task> readFromFile(String fileName, String scheduler){
         int n;
         String[] token;
         ArrayList<Task> taskSet = new ArrayList<Task>();
@@ -11,7 +11,13 @@ public class Helper {
             n = Integer.parseInt(bufferedReader.readLine());
             for(int i=0;i<n;i++){
                 token = bufferedReader.readLine().split(" ");
-                taskSet.add(new Task(ipi(token[0]),ipi(token[1]),ipi(token[2]),ipi(token[3])));
+                if(!scheduler.equals("HVDF")) {
+                    checkIfContainsNonMultipleOfFour(ipi(token[1]), ipi(token[2]), ipi(token[3]));
+                    taskSet.add(new Task(ipi(token[0]), ipi(token[1]), ipi(token[2]), ipi(token[3])));
+                }
+                else{
+                    taskSet.add(new Task(ipi(token[0]), ipi(token[1]), ipi(token[2]), ipi(token[3]), ipi(token[4])));
+                }
             }
             config.simulationTime = ipi(bufferedReader.readLine().split(" ")[1]);
             bufferedReader.close();
@@ -181,6 +187,12 @@ public class Helper {
                     break;
                 }
             }
+        }
+    }
+
+    public void checkIfContainsNonMultipleOfFour(int a, int b, int c){
+        if(a%4!=0 || b%4!=0 || c%4!=0){
+            config.containsNonMultipleOfFour = true;
         }
     }
 }
