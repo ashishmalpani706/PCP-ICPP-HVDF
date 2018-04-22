@@ -26,7 +26,7 @@ public class Scheduler {
             if(scheduler.equals("HVDF")) {
                 h.sortByDeadline(taskSet, time);
             }
-            currentTask = pickTask(taskSet,resourceSet, currentTask, time, h, tasksWithResources);
+            currentTask = pickTask(taskSet,resourceSet, currentTask, time, h, tasksWithResources, scheduler);
             if(currentTask == null){
                 h.printInfo(time);
                 this.checkForDeadlines(taskSet, resourceSet, time,h, tasksWithResources);
@@ -65,7 +65,7 @@ public class Scheduler {
     }
 
     public Task pickTask(ArrayList<Task> taskSet, ArrayList<Resource> resourceSet, Task prevTask, int time, Helper h,
-                         Stack<Task> tasksWithResources){
+                         Stack<Task> tasksWithResources, String scheduler){
         for(Task t:taskSet){
             if(t.getFlag()){
 
@@ -76,9 +76,14 @@ public class Scheduler {
                         tasksWithResources.push(t);
                         System.out.println("Resource R"+t.getResource()+" acquired by Task T"+t.getID());
                         config.cs_star = h.getResource(resourceSet, t.getResource()).getPriorityCeiling();
-                        return t;
                     }
                     else{
+                        return tasksWithResources.peek();
+                    }
+                }
+
+                if(scheduler.equals("ICPP")) {
+                    if (!t.getCriticalSection() && t.getPriority() >= config.cs_star) {
                         return tasksWithResources.peek();
                     }
                 }
