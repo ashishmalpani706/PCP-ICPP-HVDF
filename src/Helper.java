@@ -123,10 +123,10 @@ public class Helper {
         if(config.containsNonMultipleOfFour) {
             double newTime = (double)time/4;
             if(!t.getCriticalSection()){
-                System.out.println("Time = "+newTime+" - ID = T"+label);
+                System.out.println("Time = "+String.format("%.2f",newTime)+" - ID = T"+label);
             }
             else{
-                System.out.println("Time = "+newTime+" - ID = T"+label+" - Resource ID = R"+t.getResource());
+                System.out.println("Time = "+String.format("%.2f",newTime)+" - ID = T"+label+" - Resource ID = R"+t.getResource());
             }
         }
         else{
@@ -142,7 +142,7 @@ public class Helper {
     public void printInfo(int time){
         if(config.containsNonMultipleOfFour){
             double newTime = (double)time/4;
-            System.out.println("Time = "+newTime+" - IDLE");
+            System.out.println("Time = "+String.format("%.2f",newTime)+" - IDLE");
         }
         else{
             System.out.println("Time = "+time+" - IDLE");
@@ -152,7 +152,7 @@ public class Helper {
     public void missedDeadline(int time, int label){
         if(config.containsNonMultipleOfFour){
             double newTime = (double)time/4;
-            System.out.println("Time = "+newTime+" - Deadline Missed for ID = T"+label);
+            System.out.println("Time = "+String.format("%.2f",newTime)+" - Deadline Missed for ID = T"+label);
         }
         else{
             System.out.println("Time = "+time+" - Deadline Missed for ID = T"+label);
@@ -162,7 +162,7 @@ public class Helper {
     public void taskPreempted(int time, int label1, int label2){
         if(config.containsNonMultipleOfFour) {
             double newTime = (double) time / 4;
-            System.out.println("Time = " + (newTime - 0.25) + " - Task T" + label1 + " preempted by Task T" + label2);
+            System.out.println("Time = " + String.format("%.2f",(newTime - 0.25)) + " - Task T" + label1 + " preempted by Task T" + label2);
         }
         else{
             System.out.println("Time = " + (time - 1) + " - Task T" + label1 + " preempted by Task T" + label2);
@@ -249,5 +249,4 @@ public class Helper {
         }
     }
 
-    public void forma
 }

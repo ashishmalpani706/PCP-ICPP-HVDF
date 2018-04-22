@@ -1,0 +1,194 @@
+ID: 1 Execution Time: 4 Time Period: 8 Deadline: 8 Priority: 0
+ID: 2 Execution Time: 8 Time Period: 30 Deadline: 16 Priority: 0
+ID: 3 Execution Time: 8 Time Period: 28 Deadline: 28 Priority: 0
+ID: 4 Execution Time: 12 Time Period: 32 Deadline: 28 Priority: 0
+
+ResourceID: 0 Priority Ceiling: 1
+ResourceID: 1 Priority Ceiling: 4
+
+Running PCP Scheduling on the input data
+
+After sorting, we have the following tasks with descending priorities
+ID: 1 Execution Time: 4 Time Period: 8 Deadline: 8 Priority: 1
+ID: 3 Execution Time: 8 Time Period: 28 Deadline: 28 Priority: 2
+ID: 2 Execution Time: 8 Time Period: 30 Deadline: 16 Priority: 3
+ID: 4 Execution Time: 12 Time Period: 32 Deadline: 28 Priority: 4
+
+Time = 0.25 - ID = T1
+Time = 0.50 - ID = T1
+Time = 0.75 - ID = T1
+Time = 1.00 - ID = T1
+Resource R0 acquired by Task T1
+Time = 1.25 - ID = T1 - Resource ID = R0
+Time = 1.50 - ID = T1 - Resource ID = R0
+Time = 1.75 - ID = T1 - Resource ID = R0
+Time = 2.00 - ID = T1 - Resource ID = R0
+Time = 2.25 - ID = T1 - Resource ID = R0
+Time = 2.50 - ID = T1 - Resource ID = R0
+Time = 2.75 - ID = T1 - Resource ID = R0
+Time = 3.00 - ID = T1 - Resource ID = R0
+Resource R0 released by Task T1
+Time = 3.25 - ID = T1
+Time = 3.50 - ID = T1
+Time = 3.75 - ID = T1
+Time = 4.00 - ID = T1
+Task T1 has completed execution
+Time = 4.25 - ID = T3
+Time = 4.50 - ID = T3
+Time = 4.75 - ID = T3
+Time = 5.00 - ID = T3
+Time = 5.25 - ID = T3
+Time = 5.50 - ID = T3
+Time = 5.75 - ID = T3
+Time = 6.00 - ID = T3
+Resource R0 acquired by Task T3
+Time = 6.25 - ID = T3 - Resource ID = R0
+Time = 6.50 - ID = T3 - Resource ID = R0
+Time = 6.75 - ID = T3 - Resource ID = R0
+Time = 7.00 - ID = T3 - Resource ID = R0
+Time = 7.25 - ID = T3 - Resource ID = R0
+Time = 7.50 - ID = T3 - Resource ID = R0
+Time = 7.75 - ID = T3 - Resource ID = R0
+Time = 8.00 - ID = T3 - Resource ID = R0
+Time = 8.00 - Task T3 preempted by Task T1
+Time = 8.25 - ID = T1
+Time = 8.50 - ID = T1
+Time = 8.75 - ID = T1
+Time = 9.00 - ID = T1
+Task T3 has inherited the priority of Task T1 which is 1
+Time = 9.00 - Task T1 preempted by Task T3
+Time = 9.25 - ID = T3 - Resource ID = R0
+Time = 9.50 - ID = T3 - Resource ID = R0
+Time = 9.75 - ID = T3 - Resource ID = R0
+Time = 10.00 - ID = T3 - Resource ID = R0
+Time = 10.25 - ID = T3 - Resource ID = R0
+Time = 10.50 - ID = T3 - Resource ID = R0
+Time = 10.75 - ID = T3 - Resource ID = R0
+Time = 11.00 - ID = T3 - Resource ID = R0
+Resource R0 released by Task T3
+Resource R0 acquired by Task T1
+Time = 11.00 - Task T3 preempted by Task T1
+Time = 11.25 - ID = T1 - Resource ID = R0
+Time = 11.50 - ID = T1 - Resource ID = R0
+Time = 11.75 - ID = T1 - Resource ID = R0
+Time = 12.00 - ID = T1 - Resource ID = R0
+Time = 12.25 - ID = T1 - Resource ID = R0
+Time = 12.50 - ID = T1 - Resource ID = R0
+Time = 12.75 - ID = T1 - Resource ID = R0
+Time = 13.00 - ID = T1 - Resource ID = R0
+Resource R0 released by Task T1
+Time = 13.25 - ID = T1
+Time = 13.50 - ID = T1
+Time = 13.75 - ID = T1
+Time = 14.00 - ID = T1
+Task T1 has completed execution
+Time = 14.25 - ID = T3
+Time = 14.50 - ID = T3
+Time = 14.75 - ID = T3
+Time = 15.00 - ID = T3
+Time = 15.25 - ID = T3
+Time = 15.50 - ID = T3
+Time = 15.75 - ID = T3
+Time = 16.00 - ID = T3
+Task T3 has completed execution
+Time = 16.00 - Deadline Missed for ID = T2
+Time = 16.25 - ID = T1
+Time = 16.50 - ID = T1
+Time = 16.75 - ID = T1
+Time = 17.00 - ID = T1
+Resource R0 acquired by Task T1
+Time = 17.25 - ID = T1 - Resource ID = R0
+Time = 17.50 - ID = T1 - Resource ID = R0
+Time = 17.75 - ID = T1 - Resource ID = R0
+Time = 18.00 - ID = T1 - Resource ID = R0
+Time = 18.25 - ID = T1 - Resource ID = R0
+Time = 18.50 - ID = T1 - Resource ID = R0
+Time = 18.75 - ID = T1 - Resource ID = R0
+Time = 19.00 - ID = T1 - Resource ID = R0
+Resource R0 released by Task T1
+Time = 19.25 - ID = T1
+Time = 19.50 - ID = T1
+Time = 19.75 - ID = T1
+Time = 20.00 - ID = T1
+Task T1 has completed execution
+Time = 20.25 - ID = T4
+Time = 20.50 - ID = T4
+Time = 20.75 - ID = T4
+Time = 21.00 - ID = T4
+Time = 21.25 - ID = T4
+Time = 21.50 - ID = T4
+Time = 21.75 - ID = T4
+Time = 22.00 - ID = T4
+Time = 22.25 - ID = T4
+Time = 22.50 - ID = T4
+Time = 22.75 - ID = T4
+Time = 23.00 - ID = T4
+Resource R1 acquired by Task T4
+Time = 23.25 - ID = T4 - Resource ID = R1
+Time = 23.50 - ID = T4 - Resource ID = R1
+Time = 23.75 - ID = T4 - Resource ID = R1
+Time = 24.00 - ID = T4 - Resource ID = R1
+Time = 24.00 - Task T4 preempted by Task T1
+Time = 24.25 - ID = T1
+Time = 24.50 - ID = T1
+Time = 24.75 - ID = T1
+Time = 25.00 - ID = T1
+Resource R0 acquired by Task T1
+Time = 25.25 - ID = T1 - Resource ID = R0
+Time = 25.50 - ID = T1 - Resource ID = R0
+Time = 25.75 - ID = T1 - Resource ID = R0
+Time = 26.00 - ID = T1 - Resource ID = R0
+Time = 26.25 - ID = T1 - Resource ID = R0
+Time = 26.50 - ID = T1 - Resource ID = R0
+Time = 26.75 - ID = T1 - Resource ID = R0
+Time = 27.00 - ID = T1 - Resource ID = R0
+Resource R0 released by Task T1
+Time = 27.25 - ID = T1
+Time = 27.50 - ID = T1
+Time = 27.75 - ID = T1
+Time = 28.00 - ID = T1
+Task T1 has completed execution
+Time = 28.00 - Deadline Missed for ID = T4
+Resource R1 released by Task T4
+Time = 28.25 - ID = T3
+Time = 28.50 - ID = T3
+Time = 28.75 - ID = T3
+Time = 29.00 - ID = T3
+Time = 29.25 - ID = T3
+Time = 29.50 - ID = T3
+Time = 29.75 - ID = T3
+Time = 30.00 - ID = T3
+Resource R0 acquired by Task T3
+Time = 30.25 - ID = T3 - Resource ID = R0
+Time = 30.50 - ID = T3 - Resource ID = R0
+Time = 30.75 - ID = T3 - Resource ID = R0
+Time = 31.00 - ID = T3 - Resource ID = R0
+Time = 31.25 - ID = T3 - Resource ID = R0
+Time = 31.50 - ID = T3 - Resource ID = R0
+Time = 31.75 - ID = T3 - Resource ID = R0
+Time = 32.00 - ID = T3 - Resource ID = R0
+
+--Task T1--
+Number of Deadlines Missed: 0
+Number of Times Preempted : 1
+--Task T2--
+Number of Deadlines Missed: 1
+Number of Times Preempted : 0
+--Task T3--
+Number of Deadlines Missed: 0
+Number of Times Preempted : 2
+--Task T4--
+Number of Deadlines Missed: 1
+Number of Times Preempted : 1
+
+Total Number of Deadlines Missed : 2
+Total Number of Preemptions : 4
+
+T1: ||||\\\\\\\\||||----------------||||--------\\\\\\\\||||--------||||\\\\\\\\||||----------------||||\\\\\\\\||||----------------
+T2: --------------------------------------------------------------------------------------------------------------------------------
+T3: ----------------||||||||\\\\\\\\----\\\\\\\\------------||||||||------------------------------------------------||||||||\\\\\\\\
+T4: --------------------------------------------------------------------------------||||||||||||\\\\--------------------------------
+
+Task = | -AND- Resource = \
+Each unit time = 0.25
+
