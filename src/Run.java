@@ -8,10 +8,15 @@ public class Run {
         //Provide the path of the resource file. If the file is not in the main directory then specify absolute path
         String resourceFileName = "input2.txt";
 
+        //Provide the path for HVDF scheduler. If the file is not in the main directory then specify absolute path
+        String hvdfFileName = "input3.txt";
+
         //Specify the scheduler. Choose between PCP, ICPP and HVDF
-        String selectedScheduler = "PCP";
+        //String selectedScheduler = "PCP";
         //String selectedScheduler = "ICPP";
         //String selectedScheduler = "HVDF";
+
+        String selectedScheduler = args[0].toUpperCase();
 
         //outputToAFile(); //UNCOMMENT THE LINE TO SAVE THE OUTPUT TO A FILE "output.txt" in root directory and
         // not output to the console
@@ -19,21 +24,28 @@ public class Run {
         Helper help = new Helper();
         Scheduler sch = new Scheduler();
 
-        //Obtain the tasks from the file to make a set of tasks
-        ArrayList<Task> taskSet = help.readFromFile("..\\"+fileName, selectedScheduler);
-        help.printTaskSet(taskSet);
+        if(!selectedScheduler.equals("HVDF")) {
+            //Obtain the tasks from the file to make a set of tasks
+            ArrayList<Task> taskSet = help.readFromFile("..\\" + fileName, selectedScheduler);
+            help.printTaskSet(taskSet);
 
-        System.out.println("\nAfter Sorting - Based on RM:");
-        help.sortByTimePeriod(taskSet);
-        help.printTaskSet(taskSet);
+            //Obtain the tasks from the file to make a set of tasks
+            ArrayList<Resource> resourceSet = help.readResourcesFromFile("..\\" + resourceFileName, taskSet);
+            help.sortByTimePeriod(taskSet);
+            help.calculatePriorityCeiling(taskSet, resourceSet);
+            System.out.println();
+            help.printResourceSet(resourceSet);
 
-        //Obtain the tasks from the file to make a set of tasks
-        ArrayList<Resource> resourceSet = help.readResourcesFromFile("..\\"+resourceFileName, taskSet);
-        help.calculatePriorityCeiling(taskSet, resourceSet);
-        help.printResourceSet(resourceSet);
+            System.out.println("\nRunning "+selectedScheduler+" Scheduling on the input data");
+            sch.sched(taskSet,resourceSet,config.simulationTime,selectedScheduler);
+        }
+        else{
+            ArrayList<Task> hvdfTaskSet = help.readFromFile("..\\" + hvdfFileName, selectedScheduler);
 
-        System.out.println("\nRunning "+selectedScheduler+" Scheduling on the input data");
-        sch.sched(taskSet,resourceSet,config.simulationTime,selectedScheduler);
+            System.out.println("\nRunning "+selectedScheduler+" Scheduling on the input data");
+            sch.sched(hvdfTaskSet ,null,config.simulationTime,selectedScheduler);
+        }
+
 
         printLegend();
     }

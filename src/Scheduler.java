@@ -12,9 +12,8 @@ public class Scheduler {
             h.sortByTimePeriod(taskSet);
         }
 
-        //----------------------------------------------CHECK
         if(scheduler.equals("HVDF")){
-            h.sortByDeadline(taskSet,time);
+            h.sortByDensity(taskSet,time);
         }
 
         h.printTaskSet(taskSet);
@@ -24,18 +23,18 @@ public class Scheduler {
         while(time<simulationTime){
             time++;
             if(scheduler.equals("HVDF")) {
-                h.sortByDeadline(taskSet, time);
+                h.sortByDensity(taskSet, time);
             }
             currentTask = pickTask(taskSet,resourceSet, currentTask, time, h, tasksWithResources, scheduler);
             if(currentTask == null){
                 h.printInfo(time);
-                this.checkForDeadlines(taskSet, resourceSet, time,h, tasksWithResources);
+                this.checkForDeadlines(taskSet, resourceSet, time,h, tasksWithResources, scheduler);
                 this.updateTaskSet(taskSet,time);
                 continue;
             }
             h.printInfo(taskSet,time,currentTask.getID());
             this.updateCurrentTask(currentTask,time,h);
-            this.checkForDeadlines(taskSet, resourceSet, time,h, tasksWithResources);
+            this.checkForDeadlines(taskSet, resourceSet, time,h, tasksWithResources, scheduler);
             this.updateTaskSet(taskSet,time);
 
             //valid for task with a resource value greater than -1
@@ -121,9 +120,21 @@ public class Scheduler {
         }
     }
 
-    public void checkForDeadlines(ArrayList<Task> taskSet, ArrayList<Resource> resourceSet, int time, Helper h, Stack<Task> tasksWithResources){
+    public void checkForDeadlines(ArrayList<Task> taskSet, ArrayList<Resource> resourceSet, int time, Helper h,
+                                  Stack<Task> tasksWithResources, String scheduler){
         for(Task t:taskSet){
-            if(t.getFlag() && t.getDeadline() == time){
+            boolean willMissDeadline_HVDF = false;
+
+            if(t.getFlag() && scheduler.equals("HVDF")){
+                int remainingTime = t.getDeadline() - time;
+                int remainingComputationTime = t.getExecutionTime() - t.getExecutedTime();
+                if(remainingTime<remainingComputationTime){
+                    willMissDeadline_HVDF = true;
+                    System.out.println("Dropping Task T"+t.getID()+" due to insufficient time available for completion");
+                }
+            }
+
+            if(t.getFlag() && (t.getDeadline() == time || willMissDeadline_HVDF)){
                 h.missedDeadline(time,t.getID());
                 t.incrementNumberOfDeadlinesMissed();
                 t.setExecutedTime(0);

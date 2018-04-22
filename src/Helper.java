@@ -16,7 +16,7 @@ public class Helper {
                     taskSet.add(new Task(ipi(token[0]), ipi(token[1]), ipi(token[2]), ipi(token[3])));
                 }
                 else{
-                    taskSet.add(new Task(ipi(token[0]), ipi(token[1]), ipi(token[2]), ipi(token[3]), ipi(token[4])));
+                    taskSet.add(new Task(ipi(token[0]), ipi(token[1]), ipi(token[2]), ipi(token[3]), (ipi(token[4])/ipi(token[1]))));
                 }
             }
             config.simulationTime = ipi(bufferedReader.readLine().split(" ")[1]);
@@ -85,6 +85,23 @@ public class Helper {
                 return (t1.getDeadline()-time) - (t2.getDeadline()-time);
             }
         });
+    }
+
+    public void sortByDensity(ArrayList<Task> taskSet, int time){
+        Collections.sort(taskSet, new Comparator<Task>(){
+            @Override
+            public int compare(Task t1, Task t2){
+                double x = t1.getDensity() - t2.getDensity();
+                if(x>0.0)      return -1;
+                else if(x<0.0) return  1;
+                else           return (t1.getDeadline()-time) - (t2.getDeadline()-time);
+            }
+        });
+
+        int i = 1;
+        for(Task t:taskSet){
+            t.setPriority(i++);
+        }
     }
 
     public void sortByTimePeriod(ArrayList<Task> taskSet){

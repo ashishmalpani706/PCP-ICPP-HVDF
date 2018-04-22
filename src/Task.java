@@ -1,6 +1,6 @@
 public class Task {
     private int id;
-    private int value;
+    private double density;
     private int deadline;
     private int executed;
     private int resource;
@@ -27,10 +27,10 @@ public class Task {
         resource = -1;
         priority = 0;
         criticalSection = false;
-        value = 0;
+        density = 0.0;
     }
 
-    public Task(int label, int et, int period, int dl, int valueFromFile){
+    public Task(int label, int et, int period, int dl, double valueFromFile){
         id            = label;
         executionTime = et;
         timePeriod    = period;
@@ -43,12 +43,18 @@ public class Task {
         resource = -1;
         priority = 0;
         criticalSection = false;
-        value = valueFromFile;
+        density = valueFromFile;
     }
 
     public void printTask(){
-        System.out.println("ID: "+id+" Execution Time: "+executionTime+" Time Period: "
-                +timePeriod+" Deadline: "+deadline+" Priority: "+priority);
+        if(density==0.0){
+            System.out.println("ID: "+id+" Execution Time: "+executionTime+" Time Period: "
+                    +timePeriod+" Deadline: "+deadline+" Priority: "+priority);
+        }
+        else{
+            System.out.println("ID: "+id+" Execution Time: "+executionTime+" Time Period: "
+                    +timePeriod+" Deadline: "+deadline+" Priority: "+priority+" Density: "+density);
+        }
     }
 
     public int getID(){
@@ -89,6 +95,10 @@ public class Task {
 
     public int getResource(){
         return resource;
+    }
+
+    public double getDensity(){
+        return density;
     }
 
     public boolean getFlag(){
