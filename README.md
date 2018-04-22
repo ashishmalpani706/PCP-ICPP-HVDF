@@ -1,11 +1,9 @@
 #This project demonstrates PCP, ICPP and HVDF scheduling algorithms.
 #
-#To compile: 
-#javac Run.java
+#To compile: javac Run.java
 #
-#To run:
+#To run: java Run \"\<scheduler\>\" 
 #
-java Run \"\<scheduler\>\"
 #NOTE: the value of the scheduler should be in double quotes
 #
 #Scheduler can be pcp, icpp or hvdf.
