@@ -121,20 +121,30 @@ public class Helper {
     public void printInfo(ArrayList<Task> taskSet, int time, int label){
         Task t = getTask(taskSet, label);
         if(config.containsNonMultipleOfFour) {
-            double newTime = (double)time/4;
-            if(!t.getCriticalSection()){
-                System.out.println("Time = "+String.format("%.2f",newTime)+" - ID = T"+label);
+            double newTime = (double) time / 4;
+            if (!t.getCriticalSection()) {
+                System.out.println("Time = " + String.format("%.2f", newTime) + " - ID = T" + label + " - Priority = P" + t.getPriority());
             }
-            else{
-                System.out.println("Time = "+String.format("%.2f",newTime)+" - ID = T"+label+" - Resource ID = R"+t.getResource());
+            else {
+                if (t.getInheritanceFlag()) {
+                    System.out.println("Time = " + String.format("%.2f", newTime) + " - ID = T" + label + " - Resource ID = R" + t.getResource() + " - Priority = P" + config.cs_star);
+                }
+                else {
+                    System.out.println("Time = " + String.format("%.2f", newTime) + " - ID = T" + label + " - Resource ID = R" + t.getResource() + " - Priority = P" + t.getPriority());
+                }
             }
         }
         else{
             if(!t.getCriticalSection()){
-                System.out.println("Time = "+time+" - ID = T"+label);
+                System.out.println("Time = "+time+" - ID = T"+label+" - Priority = P"+t.getPriority());
             }
             else{
-                System.out.println("Time = "+time+" - ID = T"+label+" - Resource ID = R"+t.getResource());
+                if(t.getInheritanceFlag()) {
+                    System.out.println("Time = "+time+" - ID = T"+label+" - Resource ID = R"+t.getResource()+" - Priority = P"+config.cs_star);
+                }
+                else {
+                    System.out.println("Time = "+time+" - ID = T"+label+" - Resource ID = R"+t.getResource()+" - Priority = P"+t.getPriority());
+                }
             }
         }
     }

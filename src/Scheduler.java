@@ -36,6 +36,7 @@ public class Scheduler {
         while(time<simulationTime){
             time++;
             if(scheduler.equals("HVDF")) {
+                h.sortByDeadline(taskSet, time);
                 h.sortByDensity(taskSet, time);
             }
             currentTask = pickTask(taskSet,resourceSet, currentTask, time, h, tasksWithResources, scheduler);
@@ -61,9 +62,9 @@ public class Scheduler {
                         System.out.println("Task T"+tasksWithResources.peek().getID()+" has inherited the " +
                                 "priority of Task T"+h.getTaskFromPriority(taskSet,config.cs_star).getID()+" which is "
                                 +config.cs_star);
-                        currentTask.setInheritanceFlag(true);
+                        //currentTask.setInheritanceFlag(true);
+                        tasksWithResources.peek().setInheritanceFlag(true);
                     }
-
                 }
 
             }
@@ -83,6 +84,7 @@ public class Scheduler {
                             .getResource()).getPriorityCeiling();
                 }
             }
+
         }
         System.out.println();
         h.printDetails(taskSet);

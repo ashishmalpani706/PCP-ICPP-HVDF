@@ -12,7 +12,7 @@ public class Test {
     }
     public ArrayList<Task> testGetAndPrintTaskSet(Helper help){
         String fileName = "input.txt";
-        ArrayList<Task> taskSet = help.readFromFile("..\\"+fileName);
+        ArrayList<Task> taskSet = help.readFromFile("..\\"+fileName, "pcp");
         help.sortByTimePeriod(taskSet);
         help.printTaskSet(taskSet);
         return taskSet;
