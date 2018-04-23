@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 public class Run {
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException {
         //Provide the path of the file. If the file is not in the main directory then specify absolute path
         String fileName = "input.txt";
 
@@ -18,7 +18,7 @@ public class Run {
 
         String selectedScheduler = args[0].toUpperCase();
 
-        //outputToAFile(); //UNCOMMENT THE LINE TO SAVE THE OUTPUT TO A FILE "output.txt" in root directory and
+        outputToAFile("..\\output.txt"); //UNCOMMENT THE LINE TO SAVE THE OUTPUT TO A FILE "output.txt" in root directory and
         // not output to the console
 
         Helper help = new Helper();
@@ -45,14 +45,19 @@ public class Run {
             System.out.println("\nRunning "+selectedScheduler+" Scheduling on the input data");
             sch.sched(hvdfTaskSet ,null,config.simulationTime,selectedScheduler);
         }
-
-
         printLegend();
+
+
+
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+
+        Files.printToConsoleFromFile(selectedScheduler);
+
     }
 
-    public static void outputToAFile(){
+    public static void outputToAFile(String file){
         try{
-            PrintStream out = new PrintStream(new FileOutputStream("..\\output.txt"));
+            PrintStream out = new PrintStream(new FileOutputStream(file));
             System.setOut(out);
         }
         catch(FileNotFoundException fnfe){

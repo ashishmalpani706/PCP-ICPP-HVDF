@@ -104,7 +104,12 @@ public class Scheduler {
                     if(t.getPriority()<config.cs_star && !h.getResource(resourceSet, t.getResource()).getIsLocked()){
                         h.getResource(resourceSet, t.getResource()).setIsLocked(true);
                         tasksWithResources.push(t);
-                        System.out.println("Resource R"+t.getResource()+" acquired by Task T"+t.getID());
+                        if(!config.containsNonMultipleOfFour)
+                            System.out.println("Time = "+(time-1)+" Resource R"+t.getResource()+" acquired by Task T"+t.getID());
+                        else {
+                            double newTime = (double)time/4 - 0.25;
+                            System.out.println("Time = "+String.format("%.2f",newTime)+" Resource R"+t.getResource()+" acquired by Task T"+t.getID());
+                        }
                         config.cs_star = h.getResource(resourceSet, t.getResource()).getPriorityCeiling();
                     }
                     else{

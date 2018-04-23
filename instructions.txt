@@ -1,0 +1,20 @@
+This project demonstrates PCP, ICPP and HVDF scheduling algorithms.
+
+Go to the src directory in the root directory and then execute the following commands
+
+To compile: javac Run.java
+
+To run: java Run <scheduler> 
+
+NOTE: the value of the scheduler should be in double quotes
+
+Scheduler can be pcp, icpp or hvdf.
+For Example: java Run "pcp" or java Run "icpp" or java Run "hvdf"
+
+The output is also saved to a file output.txt in the main directory as well as printed on the console
+
+There are three files associated with the schedulers
+
+PCP and ICPP uses 'input.txt' for tasks and 'input2.txt' for resources
+
+HVDF uses the file 'input3.txt' for tasks
